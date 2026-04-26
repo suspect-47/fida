@@ -3,22 +3,29 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Menu, X } from 'lucide-react'
 import { ShinyText } from './ShinyText'
 
-const NAV_LINKS = ['Home', 'How It Works', 'FDA Data', 'AI Research', 'Reports']
+const NAV_LINKS = [
+  { label: 'Home',         href: '#home' },
+  { label: 'How It Works', href: '#how-it-works' },
+  { label: 'FDA Data',     href: '#fda-data' },
+  { label: 'AI Research',  href: '#ai-research' },
+  { label: 'Reports',      href: '#reports' },
+]
 
 export function HeroSection() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
     <section
+      id="home"
       style={{
         position: 'relative',
         height: '100vh',
         width: '100%',
         overflow: 'hidden',
-        backgroundColor: '#000',
+        backgroundColor: '#fff',
       }}
     >
-      {/* Video */}
+      {/* Video — very faint, just adds subtle motion texture */}
       <video
         style={{
           position: 'absolute',
@@ -26,7 +33,7 @@ export function HeroSection() {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          opacity: 0.45,
+          opacity: 0.07,
         }}
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_105406_16f4600d-7a92-4292-b96e-b19156c7830a.mp4"
         autoPlay
@@ -35,12 +42,13 @@ export function HeroSection() {
         playsInline
       />
 
-      {/* Bottom fade to black */}
+      {/* Bottom fade to white for smooth section transition */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 40%, #000 100%)',
+          background: 'linear-gradient(to bottom, transparent 60%, #fff 100%)',
+          pointerEvents: 'none',
         }}
       />
 
@@ -54,7 +62,7 @@ export function HeroSection() {
           height: '100%',
           maxWidth: '80rem',
           margin: '0 auto',
-          padding: '0 2rem',
+          padding: '0 2.5rem',
         }}
       >
         {/* Nav */}
@@ -70,18 +78,18 @@ export function HeroSection() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
             <div
               style={{
-                width: '2rem',
-                height: '2rem',
+                width: '2.1rem',
+                height: '2.1rem',
                 borderRadius: '50%',
-                border: '2px solid #fff',
+                border: '2px solid #111',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
-              <div style={{ width: '0.6rem', height: '0.6rem', borderRadius: '50%', backgroundColor: '#fff' }} />
+              <div style={{ width: '0.65rem', height: '0.65rem', borderRadius: '50%', backgroundColor: '#111' }} />
             </div>
-            <span style={{ color: '#fff', fontWeight: 600, fontSize: '0.9rem', letterSpacing: '0.05em' }}>
+            <span style={{ color: '#111', fontWeight: 800, fontSize: '1rem', letterSpacing: '0.06em' }}>
               FIDA
             </span>
           </div>
@@ -92,31 +100,33 @@ export function HeroSection() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.125rem',
-              border: '1px solid rgba(255,255,255,0.18)',
+              gap: '0',
+              border: '1.5px solid rgba(0,0,0,0.12)',
               borderRadius: '9999px',
-              padding: '0.375rem 0.75rem',
-              backdropFilter: 'blur(8px)',
-              backgroundColor: 'rgba(0,0,0,0.25)',
+              padding: '0.4rem 0.75rem',
+              backgroundColor: 'rgba(255,255,255,0.85)',
+              backdropFilter: 'blur(12px)',
             }}
           >
-            {NAV_LINKS.map((link) => (
+            {NAV_LINKS.map(({ label, href }) => (
               <a
-                key={link}
-                href="#"
+                key={label}
+                href={href}
                 style={{
-                  color: 'rgba(255,255,255,0.75)',
-                  fontSize: '0.8125rem',
-                  padding: '0.25rem 0.875rem',
+                  color: '#333',
+                  fontWeight: 600,
+                  fontSize: '0.875rem',
+                  padding: '0.3rem 1rem',
                   borderRadius: '9999px',
                   textDecoration: 'none',
                   transition: 'color 0.2s',
                   whiteSpace: 'nowrap',
+                  letterSpacing: '0.01em',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.75)')}
+                onMouseEnter={(e) => (e.currentTarget.style.color = '#000')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = '#333')}
               >
-                {link}
+                {label}
               </a>
             ))}
             <a
@@ -125,15 +135,16 @@ export function HeroSection() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.375rem',
-                color: 'rgba(255,255,255,0.75)',
-                fontSize: '0.8125rem',
-                padding: '0.25rem 0.875rem',
+                color: '#333',
+                fontWeight: 600,
+                fontSize: '0.875rem',
+                padding: '0.3rem 1rem',
                 textDecoration: 'none',
                 transition: 'color 0.2s',
                 whiteSpace: 'nowrap',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.75)')}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#000')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#333')}
             >
               Contact us <ArrowRight style={{ width: '0.8rem', height: '0.8rem' }} />
             </a>
@@ -141,13 +152,7 @@ export function HeroSection() {
 
           {/* Hamburger */}
           <button
-            style={{
-              color: '#fff',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              padding: '0.25rem',
-            }}
+            style={{ color: '#111', background: 'none', border: 'none', cursor: 'pointer', padding: '0.25rem' }}
             onClick={() => setMobileOpen(!mobileOpen)}
             className="show-mobile"
           >
@@ -167,27 +172,29 @@ export function HeroSection() {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '0.25rem',
-                backgroundColor: 'rgba(0,0,0,0.85)',
+                backgroundColor: 'rgba(255,255,255,0.95)',
                 backdropFilter: 'blur(12px)',
                 borderRadius: '1rem',
                 padding: '1rem',
-                border: '1px solid rgba(255,255,255,0.1)',
+                border: '1px solid rgba(0,0,0,0.1)',
+                boxShadow: '0 8px 32px rgba(0,0,0,0.08)',
               }}
             >
-              {[...NAV_LINKS, 'Scan a Supplier'].map((link) => (
+              {[...NAV_LINKS.map(n => ({ label: n.label, href: n.href })), { label: 'Scan a Supplier', href: '#scan' }].map(({ label, href }) => (
                 <a
-                  key={link}
-                  href={link === 'Scan a Supplier' ? '#scan' : '#'}
+                  key={label}
+                  href={href}
                   onClick={() => setMobileOpen(false)}
                   style={{
-                    color: 'rgba(255,255,255,0.75)',
-                    fontSize: '0.875rem',
+                    color: '#111',
+                    fontWeight: 600,
+                    fontSize: '0.9rem',
                     padding: '0.5rem 0.75rem',
                     borderRadius: '0.5rem',
                     textDecoration: 'none',
                   }}
                 >
-                  {link}
+                  {label}
                 </a>
               ))}
             </motion.div>
@@ -202,15 +209,16 @@ export function HeroSection() {
             justifyContent: 'space-between',
             alignItems: 'flex-start',
             gap: '1rem',
-            marginTop: '2.5rem',
+            marginTop: '2.75rem',
           }}
         >
           <p
             style={{
-              color: 'rgba(255,255,255,0.7)',
-              fontSize: '0.875rem',
-              maxWidth: '22rem',
-              lineHeight: 1.6,
+              color: '#555',
+              fontSize: '1rem',
+              maxWidth: '24rem',
+              lineHeight: 1.65,
+              fontWeight: 400,
             }}
           >
             We deliver instant compliance intelligence, combining real-time FDA enforcement
@@ -218,9 +226,10 @@ export function HeroSection() {
           </p>
           <p
             style={{
-              color: 'rgba(255,255,255,0.7)',
-              fontSize: '0.875rem',
+              color: '#555',
+              fontSize: '1rem',
               textAlign: 'right',
+              fontWeight: 500,
               whiteSpace: 'nowrap',
             }}
           >
@@ -228,7 +237,7 @@ export function HeroSection() {
           </p>
         </div>
 
-        {/* Center hero */}
+        {/* Center hero content */}
         <div
           style={{
             display: 'flex',
@@ -237,7 +246,7 @@ export function HeroSection() {
             justifyContent: 'center',
             flex: 1,
             textAlign: 'center',
-            paddingBottom: '4rem',
+            paddingBottom: '5rem',
           }}
         >
           <motion.p
@@ -245,11 +254,12 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             style={{
-              color: 'rgba(255,255,255,0.6)',
-              fontSize: '0.7rem',
-              letterSpacing: '0.12em',
+              color: '#888',
+              fontSize: '0.75rem',
+              letterSpacing: '0.14em',
               textTransform: 'uppercase',
               marginBottom: '1.5rem',
+              fontWeight: 500,
             }}
           >
             AI-Powered Supplier Intelligence · Always On
@@ -260,14 +270,14 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
             style={{
-              fontWeight: 500,
-              lineHeight: 0.88,
-              letterSpacing: '-0.04em',
-              fontSize: 'clamp(3.5rem, 12vw, 9rem)',
+              fontWeight: 800,
+              lineHeight: 0.9,
+              letterSpacing: '-0.045em',
+              fontSize: 'clamp(4rem, 13vw, 10rem)',
               margin: 0,
             }}
           >
-            <span style={{ color: '#fff', display: 'block' }}>Verify</span>
+            <span style={{ color: '#0a0a0a', display: 'block' }}>Verify</span>
             <ShinyText text="Every Supplier." />
           </motion.h1>
 
@@ -277,29 +287,28 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
             style={{
-              marginTop: '2.5rem',
+              marginTop: '2.75rem',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.5rem',
-              backgroundColor: '#000',
-              border: '1px solid rgba(255,255,255,0.25)',
+              backgroundColor: '#0a0a0a',
               borderRadius: '9999px',
-              padding: '0.875rem 2rem',
+              padding: '1rem 2.25rem',
               color: '#fff',
-              fontSize: '0.875rem',
-              fontWeight: 500,
+              fontSize: '0.9375rem',
+              fontWeight: 700,
               textDecoration: 'none',
-              transition: 'background-color 0.2s, border-color 0.2s',
+              letterSpacing: '0.01em',
+              transition: 'background-color 0.2s, transform 0.2s',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.15)',
             }}
             onMouseEnter={(e) => {
-              const el = e.currentTarget
-              el.style.backgroundColor = '#111'
-              el.style.borderColor = 'rgba(255,255,255,0.4)'
+              e.currentTarget.style.backgroundColor = '#222'
+              e.currentTarget.style.transform = 'translateY(-1px)'
             }}
             onMouseLeave={(e) => {
-              const el = e.currentTarget
-              el.style.backgroundColor = '#000'
-              el.style.borderColor = 'rgba(255,255,255,0.25)'
+              e.currentTarget.style.backgroundColor = '#0a0a0a'
+              e.currentTarget.style.transform = 'translateY(0)'
             }}
           >
             Scan a Supplier Now
@@ -309,12 +318,8 @@ export function HeroSection() {
       </div>
 
       <style>{`
-        @media (max-width: 1023px) {
-          .hidden-mobile { display: none !important; }
-        }
-        @media (min-width: 1024px) {
-          .show-mobile { display: none !important; }
-        }
+        @media (max-width: 1023px) { .hidden-mobile { display: none !important; } }
+        @media (min-width: 1024px) { .show-mobile { display: none !important; } }
       `}</style>
     </section>
   )

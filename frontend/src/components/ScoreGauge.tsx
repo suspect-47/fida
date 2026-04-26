@@ -8,12 +8,12 @@ export function ScoreGauge({ score }: ScoreGaugeProps) {
   const radius = 54
   const circumference = 2 * Math.PI * radius
   const offset = circumference - (score / 100) * circumference
-  const color = score >= 70 ? '#22c55e' : score >= 40 ? '#f59e0b' : '#ef4444'
+  const color = score >= 70 ? '#16a34a' : score >= 40 ? '#d97706' : '#dc2626'
 
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
       <svg width="140" height="140" viewBox="0 0 140 140">
-        <circle cx="70" cy="70" r={radius} fill="none" stroke="#1f2937" strokeWidth="10" />
+        <circle cx="70" cy="70" r={radius} fill="none" stroke="#f0f0f0" strokeWidth="10" />
         <motion.circle
           cx="70"
           cy="70"
@@ -28,11 +28,13 @@ export function ScoreGauge({ score }: ScoreGaugeProps) {
           strokeLinecap="round"
           transform="rotate(-90 70 70)"
         />
-        <text x="70" y="70" textAnchor="middle" dy="0.35em" fill="white" fontSize="26" fontWeight="600" fontFamily="Inter, sans-serif">
+        <text x="70" y="70" textAnchor="middle" dy="0.35em" fill="#0a0a0a" fontSize="28" fontWeight="800" fontFamily="Inter, sans-serif">
           {score}
         </text>
       </svg>
-      <span className="text-white/50 text-xs uppercase tracking-wider">Compliance Score</span>
+      <span style={{ color: '#aaa', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>
+        Compliance Score
+      </span>
     </div>
   )
 }
