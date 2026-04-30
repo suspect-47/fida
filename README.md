@@ -1,7 +1,7 @@
-# Tavera — Food Supplier Compliance Checker
+# FIDA — Food Supplier Compliance Checker
 
 FastAPI backend that combines FDA enforcement data + autonomous Hermes web research,
-synthesised by an LLM into a structured compliance report.
+synthesized by an LLM into a structured compliance report.
 
 ## Prerequisites
 
